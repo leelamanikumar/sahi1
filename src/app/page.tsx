@@ -14,7 +14,7 @@ export default function Home() {
           "Photoshoot Ready",
           "Traditional Look",
         ]}
-        phone="+91 98765 43210"
+        phone="+91 81438 79687"
         location="Hyderabad, Telangana"
         whatsapp="919876543210"
         instagram="sahithi_makeup"
