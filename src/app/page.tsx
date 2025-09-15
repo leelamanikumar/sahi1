@@ -16,8 +16,8 @@ export default function Home() {
         ]}
         phone="+91 81438 79687"
         location="Hyderabad, Telangana"
-        whatsapp="919876543210"
-        instagram="sahithi_makeup"
+        whatsapp="918143879687"
+        instagram="glam_by_sahithi"
         pricingNote="Bridal packages starting from ₹10,000 • Free consultation"
         images={[
           { src: "/cropped-A11-min.jpg", alt: "Bridal makeup look 1", caption: "Traditional look" },
