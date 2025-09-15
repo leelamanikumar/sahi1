@@ -3,8 +3,10 @@
 import Image from "next/image";
 import { useCallback, useMemo, useRef, useState } from "react";
 
+type CarouselImage = { src: string; alt?: string; caption?: string };
+
 type CarouselProps = {
-  images: { src: string; alt?: string }[];
+  images: CarouselImage[];
   aspectRatio?: string; // e.g., "4/3", "3/4", "1/1"
 };
 
@@ -63,6 +65,17 @@ export default function Carousel({ images, aspectRatio = "4/5" }: CarouselProps)
           sizes="100vw"
           priority
         />
+
+        {currentImage.caption ? (
+          <div className="absolute inset-x-0 bottom-0">
+            <div className="pointer-events-none h-20 bg-gradient-to-t from-black/65 to-transparent" />
+            <div className="absolute inset-x-0 bottom-2 flex justify-center px-3">
+              <span className="pointer-events-none inline-block rounded-full bg-black/60 text-white text-sm px-3 py-1.5 shadow-md">
+                {currentImage.caption}
+              </span>
+            </div>
+          </div>
+        ) : null}
 
         {/* Left arrow */}
         <button

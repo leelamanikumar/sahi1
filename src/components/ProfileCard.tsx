@@ -5,17 +5,22 @@ import Carousel from "@/components/Carousel";
 type Props = {
   name: string;
   title?: string;
+  services?: string[];
   location?: string;
+  phone?: string; // displayable phone, e.g., "+91 98765 43210"
   whatsapp?: string; // full international format without spaces, e.g., 919876543210
   instagram?: string; // handle like "sahithi_makeup" or full url
   pricingNote?: string;
-  images: { src: string; alt?: string }[];
+  images: { src: string; alt?: string; caption?: string }[];
 };
 
-export default function ProfileCard({ name, title, location, whatsapp, instagram, pricingNote, images }: Props) {
+export default function ProfileCard({ name, title, services, location, phone, whatsapp, instagram, pricingNote, images }: Props) {
   const whatsappHref = whatsapp ? `https://wa.me/${whatsapp}` : undefined;
   const instagramHref = instagram
     ? (instagram.startsWith("http") ? instagram : `https://instagram.com/${instagram}`)
+    : undefined;
+  const telHref = phone
+    ? `tel:${(phone || "").replace(/[^\d+]/g, "")}`
     : undefined;
 
   return (
@@ -26,6 +31,33 @@ export default function ProfileCard({ name, title, location, whatsapp, instagram
         <div className="p-4">
           <h1 className="text-xl font-semibold">{name}</h1>
           {title ? <p className="text-sm text-black/60 mt-0.5">{title}</p> : null}
+
+          {services && services.length > 0 ? (
+            <div className="mt-3 -mx-1 overflow-x-auto">
+              <div className="flex gap-2 px-1">
+                {services.map((service, idx) => (
+                  <span
+                    key={`${service}-${idx}`}
+                    className="shrink-0 rounded-full bg-black/5 text-black/80 text-xs px-3 py-1 border border-black/10"
+                  >
+                    {service}
+                  </span>
+                ))}
+              </div>
+            </div>
+          ) : null}
+          {phone ? (
+            <p className="text-sm text-black/70 mt-2 inline-flex items-center gap-1.5">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="h-4 w-4 text-black/60"><path fillRule="evenodd" d="M1.5 4.5a3 3 0 0 1 3-3h1.372a3 3 0 0 1 2.822 1.972l.83 2.49a3 3 0 0 1-.676 3.09l-.97.97a.75.75 0 0 0-.156.82 8.75 8.75 0 0 0 4.665 4.665.75.75 0 0 0 .82-.156l.97-.97a3 3 0 0 1 3.09-.676l2.49.83A3 3 0 0 1 22.5 18.128V19.5a3 3 0 0 1-3 3h-1.125C8.56 22.5 1.5 15.44 1.5 6.625V4.5Z" clipRule="evenodd"/></svg>
+              {telHref ? (
+                <a href={telHref} className="hover:underline">
+                  {phone}
+                </a>
+              ) : (
+                phone
+              )}
+            </p>
+          ) : null}
           {location ? (
             <p className="text-sm text-black/60 mt-1 inline-flex items-center gap-1.5">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="h-4 w-4 text-black/60"><path fillRule="evenodd" d="M11.47 2.47a.75.75 0 0 1 1.06 0c2.262 2.26 6.22 6.442 6.22 9.78A6.75 6.75 0 0 1 12 19 6.75 6.75 0 0 1 6.25 12.25c0-3.338 3.96-7.52 6.22-9.78ZM12 10a2.25 2.25 0 1 0 0 4.5A2.25 2.25 0 0 0 12 10Z" clipRule="evenodd"/></svg>
